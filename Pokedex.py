@@ -1,4 +1,3 @@
-from msilib import type_string
 import os
 from os import listdir
 from pathlib import Path
@@ -313,7 +312,7 @@ class ScreenApp(App):
         usedtext = float(text)
         dataframe = pd.read_excel('Pokemonstuff2.xlsx')
         # Name string is for the name and the classification of the pokemon
-        name_string = str(dataframe.loc[0, usedtext]) +  "\n Species: " + str(dataframe.loc[11, usedtext]) 
+        name_string = str(usedtext) + ": " + str(dataframe.loc[0, usedtext]) +  "\n Species: " + str(dataframe.loc[11, usedtext]) 
         # Type string is for the pokemon type
         type_string = "Types: \n " + str(dataframe.loc[3, usedtext]) 
         # Abilities string is for the pokemon abilities"
