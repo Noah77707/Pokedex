@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 import os
 from os import listdir
 from pathlib import Path
@@ -15,11 +14,10 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.lang import Builder
-from kivy.config import Config
+from kivy.core.window import Window
 import csv
 
-Config.set('graphics', 'width', '800')
-Config.set('graphics', 'height', '480')
+# Window.size(800, 450)
 
 
 Builder.load_string("""
@@ -88,7 +86,7 @@ Builder.load_string("""
         Label:
             id: Dex_Entry
             text: "Pokemon Dex Entry"
-            pos_hint: {"x": 0, "y":0.2}
+            pos_hint: {"x": 0.2, "y":0}
             size_hint: 1, 0.3
             text_size: self.size
             valign: 'top'
@@ -106,31 +104,31 @@ Builder.load_string("""
             pos_hint: {"x": 0, "y": 0.6}
             size_hint: 0.2, 0.2
 
-# this is where you input the pokemon number
-        TextInput:
-            id: PokeNumber
-            pos_hint: {"x":0.5, "y":0.1}
-            size_hint: 0.4, 0.1
-            hint_text: 'use pokedex number'
-            on_text: app.process()
-            input_filter: 'float'
-            write_tab:False
-            limit_render_to_text_bbox: True
+# # this is where you input the pokemon number
+#         TextInput:
+#             id: PokeNumber
+#             pos_hint: {"x":0.5, "y":0.1}
+#             size_hint: 0.4, 0.1
+#             hint_text: 'use pokedex number'
+#             on_text: app.process()
+#             input_filter: 'float'
+#             write_tab:False
+#             limit_render_to_text_bbox: True
 
-# This is the search button
-        Button:
-            text: "Search"
-            pos_hint: {"x":0.5, "y":0}
-            size_hint: 0.4, 0.1
-            background_color: 1, 0, 0
-            on_press:
-                app.Search_Click()
-                app.Change_Text()
+# # This is the search button
+#         Button:
+#             text: "Search"
+#             pos_hint: {"x":0.5, "y":0}
+#             size_hint: 0.4, 0.1
+#             background_color: 1, 0, 0
+#             on_press:
+#                 app.Search_Click()
+#                 app.Change_Text()
 
 # These Buttons are to change the pokemon you are viewing
         Button:
             text: "+1"
-            pos_hint: {"x": 0.2, "y":0.1}
+            pos_hint: {"x": 0, "y":0.2}
             size_hint: 0.1, 0.1
             background_color: 1, 0, 0
             on_press:
@@ -139,7 +137,7 @@ Builder.load_string("""
 
         Button:
             text: "-1"
-            pos_hint: {"x": 0.2, "y":0}
+            pos_hint: {"x": 0.1, "y":0.2}
             size_hint: 0.1, 0.1 
             background_color: 1, 0, 0
             on_press:
@@ -147,7 +145,7 @@ Builder.load_string("""
                 app.Change_Text()   
         Button:
             text: "+10"
-            pos_hint: {"x": 0.3, "y":0.1}
+            pos_hint: {"x": 0, "y":0.3}
             size_hint: 0.1, 0.1
             background_color: 1, 0, 0
             on_press:
@@ -155,7 +153,7 @@ Builder.load_string("""
                 app.Change_Text()
         Button:
             text: "-10"
-            pos_hint: {"x": 0.3, "y":0}
+            pos_hint: {"x": 0.1, "y":0.3}
             size_hint: 0.1, 0.1
             background_color: 1, 0, 0
             on_press:
@@ -163,7 +161,7 @@ Builder.load_string("""
                 app.Change_Text()
         Button:
             text: "+100"
-            pos_hint: {"x": 0.4, "y":0.1}
+            pos_hint: {"x": 0, "y":0.4}
             size_hint: 0.1, 0.1
             background_color: 1, 0, 0
             on_press:
@@ -171,7 +169,7 @@ Builder.load_string("""
                 app.Change_Text()
         Button:
             text: "-100" 
-            pos_hint: {"x": 0.4, "y":0}
+            pos_hint: {"x": 0.1, "y":0.4}
             size_hint: 0.1, 0.1
             background_color: 1, 0, 0
             on_press:
@@ -180,15 +178,15 @@ Builder.load_string("""
 
 # These buttons are to change what gen the dex entry is from 
         Button: 
-            text: "+1"
-            pos_hint: {"x": 0.9, "y": 0.1}
+            text: "Inc"
+            pos_hint: {"x": 0, "y": 0.5}
             size_hint: 0.1, 0.1
             background_color: 1, 0, 0
             on_press:
                 app.Region_Increase()
         Button: 
-            text: "-1"
-            pos_hint: {"x": 0.9, "y": 0}
+            text: "Dec"
+            pos_hint: {"x": 0.1, "y": 0.5}
             size_hint: 0.1, 0.1
             background_color: 1, 0, 0
             on_press:
