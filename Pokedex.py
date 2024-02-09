@@ -15,9 +15,18 @@ from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.lang import Builder
 from kivy.core.window import Window
-import csv
-
+# This makes the window be the correct size for the raspberry pi.
 Window.size = (790, 450)
+
+# Information:
+# Every id/program created in Kivy is to start with a capital letter.
+# Every def/program created in python is to have no capital letters.
+# The screens are to share the same color, but have different colors for the different screens.
+# Thing that are commented out are things I think I might need in the future. They will either be reimplimented, or they will be deleted next patch
+# the version number is updated upon something I believe to be a huge milestone: These are
+# v0.1: This was the creation of the pokedex app
+# v0.2: This was when I got it running on the Raspberry pi.
+# v0.3: This was when I got images working in the pokedex screen, along with making the screen nicer to look at for the raspberry pi's smaller screen
 
 
 Builder.load_string("""
@@ -26,7 +35,7 @@ Builder.load_string("""
     # This is the main screen
     FloatLayout:
         Label:
-            text: 'Pokedex app 0.2' 
+            text: 'Pokedex app v0.3' 
             background_color: 1, 0, 0, 0
             pos_hint: {"x":0, "y":0.7}
             size_hint: 1, 0.3
@@ -64,8 +73,7 @@ Builder.load_string("""
                 root.manager.transition.durarion = 1
                 root.manager.current = 'screen_one'
 
-# Top Lavel is some information about the pokemon, Middle is the pokemon stats off to the side, and the bottom label is dex entries
-                    
+# Top Lavel is some information about the pokemon, Middle three are to put down the types, abilites, and gender ratio in an easy to read way, and the bottom label is dex entries      
         Label:
             id: Pokemon_Name
             text: "Pokemon Name"
@@ -75,15 +83,6 @@ Builder.load_string("""
             valign: 'top'
             halign: 'center'
                     
-        # Label: 
-        #     id: Pokemon_Info
-        #     text: "Pokemon Information"
-        #     pos_hint: {"x":0, "y":0.6}
-        #     size_hint: 1, 0.3
-        #     text_size: self.size
-        #     valign: 'top'
-        #     halign: 'center'
-        
         Label: 
             id: Pokemon_Type
             text: "Pokemon Type"
@@ -259,7 +258,7 @@ Builder.load_string("""
     """)
 
 
-# Global Variable
+# Global Variables
 text = "1"
 region = 1
 
@@ -321,7 +320,7 @@ class ScreenApp(App):
         gender_string =  "Gender ratio: \n" + str(dataframe.loc[17, usedtext])
         # Stat string is the pokemon stats
         stat_string = "Stat Total: " + str(dataframe.loc[4, usedtext]) + "\n Hp: " + str(dataframe.loc[5, usedtext]) + "\n Attack: " + str(dataframe.loc[6, usedtext]) + "\n Defense: " + str(dataframe.loc[7, usedtext]) + "\n Special Attack: " + str(dataframe.loc[8, usedtext]) + "\n Special Defense: " + str(dataframe.loc[9, usedtext]) + "\n Speed: " + str(dataframe.loc[10, usedtext]) 
-        # These two commands change the pokemon stat and info labels when you search for the new pokemon
+        # These ffive commands change the screen to provide accurate information of the newly selected pokemon
         self.root.get_screen('screen_two').ids.Pokemon_Name.text = name_string
         self.root.get_screen('screen_two').ids.Pokemon_Type.text = type_string
         self.root.get_screen('screen_two').ids.Pokemon_Abilities.text = abilities_string
