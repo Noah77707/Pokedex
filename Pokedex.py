@@ -17,7 +17,10 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 import csv
 
-Window.size(800, 450)
+#   IMPORTANT
+# TO TEST ON PC, COMMENT OUT WINDOW.SIZE. PUT IT BACK IN WHEN COMMITING TO MAIN
+#   IMPORTANT
+Window.size = (800, 450)
 
 
 Builder.load_string("""
