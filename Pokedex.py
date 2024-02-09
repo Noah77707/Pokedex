@@ -17,7 +17,7 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 import csv
 
-# Window.size(800, 450)
+Window.size(800, 450)
 
 
 Builder.load_string("""
