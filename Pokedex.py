@@ -20,7 +20,7 @@ import csv
 #   IMPORTANT
 # TO TEST ON PC, COMMENT OUT WINDOW.SIZE. PUT IT BACK IN WHEN COMMITING TO MAIN
 #   IMPORTANT
-Window.size = (800, 450)
+Window.size = (790, 450)
 
 
 Builder.load_string("""
