@@ -2,7 +2,9 @@ from asyncio.windows_events import NULL
 import os
 from os import listdir
 from pathlib import Path
+from turtle import width
 import pandas as pd
+import kivy
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
@@ -13,8 +15,11 @@ from kivy.uix.dropdown import DropDown
 from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.lang import Builder
+from kivy.config import Config
 import csv
 
+Config.set('graphics', 'width', '800')
+Config.set('graphics', 'height', '480')
 
 
 Builder.load_string("""
@@ -306,7 +311,7 @@ class ScreenApp(App):
         Fraction = int(MultipliedBy10 % 10)
         ImageNumber = int(usedtext)
         if (Fraction != 0):
-            NormalPokemonImage =directory + "/Images/" +  format(ImageNumber, "04") + "_" + format(Fraction, "03") + "_mf_n_00000000_f_n.png"
+            NormalPokemonImage = directory + "/Images/" +  format(ImageNumber, "04") + "_" + format(Fraction, "03") + "_mf_n_00000000_f_n.png"
         else:
             NormalPokemonImage = directory + "/Images/" +  format(ImageNumber, "04") + "_000_mf_n_00000000_f_n.png"
         if (Fraction != 0):
