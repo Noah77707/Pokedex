@@ -1,3 +1,4 @@
+from msilib import type_string
 import os
 from os import listdir
 from pathlib import Path
@@ -17,9 +18,6 @@ from kivy.lang import Builder
 from kivy.core.window import Window
 import csv
 
-#   IMPORTANT
-# TO TEST ON PC, COMMENT OUT WINDOW.SIZE. PUT IT BACK IN WHEN COMMITING TO MAIN
-#   IMPORTANT
 Window.size = (790, 450)
 
 
@@ -68,15 +66,52 @@ Builder.load_string("""
                 root.manager.current = 'screen_one'
 
 # Top Lavel is some information about the pokemon, Middle is the pokemon stats off to the side, and the bottom label is dex entries
-        Label: 
-            id: Pokemon_Info
-            text: "Pokemon Information"
+                    
+        Label:
+            id: Pokemon_Name
+            text: "Pokemon Name"
             pos_hint: {"x":0, "y":0.6}
             size_hint: 1, 0.4
             text_size: self.size
             valign: 'top'
             halign: 'center'
                     
+        # Label: 
+        #     id: Pokemon_Info
+        #     text: "Pokemon Information"
+        #     pos_hint: {"x":0, "y":0.6}
+        #     size_hint: 1, 0.3
+        #     text_size: self.size
+        #     valign: 'top'
+        #     halign: 'center'
+        
+        Label: 
+            id: Pokemon_Type
+            text: "Pokemon Type"
+            pos_hint: {"x":0.2, "y":0.6}
+            size_hint: 0.1, 0.3
+            text_size: self.size
+            valign: 'top'
+            halign: 'center'
+
+        Label: 
+            id: Pokemon_Abilities
+            text: "Pokemon Abilities"
+            pos_hint: {"x":0.3, "y":0.6}
+            size_hint: 0.2, 0.3
+            text_size: self.size
+            valign: 'top'
+            halign: 'center'
+
+        Label: 
+            id: Pokemon_Gender
+            text: "Pokemon Gender"
+            pos_hint: {"x":0.5, "y":0.6}
+            size_hint: 0.2, 0.3
+            text_size: self.size
+            valign: 'top'
+            halign: 'center'                    
+
         Label:
             id: Pokemon_Stats
             text: "Pokemon Stats"
@@ -90,7 +125,7 @@ Builder.load_string("""
             id: Dex_Entry
             text: "Pokemon Dex Entry"
             pos_hint: {"x": 0.2, "y":0}
-            size_hint: 1, 0.3
+            size_hint: 0.8, 0.6
             text_size: self.size
             valign: 'top'
             halign: 'center'
@@ -277,12 +312,21 @@ class ScreenApp(App):
         global text
         usedtext = float(text)
         dataframe = pd.read_excel('Pokemonstuff2.xlsx')
-        # Info string is for the flavor text, like species and the like
-        info_string = str(dataframe.loc[0, usedtext]) + "\n Species: \n" + str(dataframe.loc[11, usedtext]) + "\n Types: \n " + str(dataframe.loc[3, usedtext]) + "\n Abilities: \n" + str(dataframe.loc[14, usedtext]) + "\n Gender ratio: \n" + str(dataframe.loc[17, usedtext])
+        # Name string is for the name and the classification of the pokemon
+        name_string = str(dataframe.loc[0, usedtext]) +  "\n Species: " + str(dataframe.loc[11, usedtext]) 
+        # Type string is for the pokemon type
+        type_string = "Types: \n " + str(dataframe.loc[3, usedtext]) 
+        # Abilities string is for the pokemon abilities"
+        abilities_string = "Abilities: \n" + str(dataframe.loc[14, usedtext])
+        # Gender string is for the gender ratio of the pokemon
+        gender_string =  "Gender ratio: \n" + str(dataframe.loc[17, usedtext])
         # Stat string is the pokemon stats
         stat_string = "Stat Total: " + str(dataframe.loc[4, usedtext]) + "\n Hp: " + str(dataframe.loc[5, usedtext]) + "\n Attack: " + str(dataframe.loc[6, usedtext]) + "\n Defense: " + str(dataframe.loc[7, usedtext]) + "\n Special Attack: " + str(dataframe.loc[8, usedtext]) + "\n Special Defense: " + str(dataframe.loc[9, usedtext]) + "\n Speed: " + str(dataframe.loc[10, usedtext]) 
         # These two commands change the pokemon stat and info labels when you search for the new pokemon
-        self.root.get_screen('screen_two').ids.Pokemon_Info.text = info_string
+        self.root.get_screen('screen_two').ids.Pokemon_Name.text = name_string
+        self.root.get_screen('screen_two').ids.Pokemon_Type.text = type_string
+        self.root.get_screen('screen_two').ids.Pokemon_Abilities.text = abilities_string
+        self.root.get_screen('screen_two').ids.Pokemon_Gender.text = gender_string
         self.root.get_screen('screen_two').ids.Pokemon_Stats.text = stat_string
         # This important set of elif's are to send the correct regional data to the pokedex
         if region == 1:
