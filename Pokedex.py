@@ -30,9 +30,6 @@ Window.size = (790, 450)
 # The screens are to share the same color, but have different colors for the different screens.
 # Thing that are commented out are things I think I might need in the future. They will either be reimplimented, or they will be deleted next patch
 # the version number is updated upon something I believe to be a huge milestone: These are
-# v0.1: This was the creation of the pokedex app
-# v0.2: This was when I got it running on the Raspberry pi.
-# v0.3: This was when I got images working in the pokedex screen, along with making the screen nicer to look at for the raspberry pi's smaller screen
 
 
 Builder.load_string("""
@@ -41,7 +38,7 @@ Builder.load_string("""
     # This is the main screen
     FloatLayout:
         Label:
-            text: 'Pokedex app v0.3' 
+            text: 'Pokedex app v0.4' 
             background_color: 1, 0, 0, 0
             pos_hint: {"x":0, "y":0.7}
             size_hint: 1, 0.3
