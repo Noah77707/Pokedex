@@ -1,10 +1,8 @@
 import os
 from os import listdir
 from pathlib import Path
-from re import I
-from turtle import width
 import pandas as pd
-import kivy
+from decimal import Decimal, getcontext
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
@@ -99,8 +97,8 @@ Builder.load_string("""
         Label:
             id: Pokemon_Name
             text: "Pokemon Name"
-            pos_hint: {"x":0, "y":0.6}
-            size_hint: 1, 0.4
+            pos_hint: {"x":0.2, "y":0.6}
+            size_hint: 0.8, 0.4
             text_size: self.size
             valign: 'top'
             halign: 'center'
@@ -108,7 +106,7 @@ Builder.load_string("""
         Label: 
             id: Pokemon_Type
             text: "Pokemon Type"
-            pos_hint: {"x":0.2, "y":0.6}
+            pos_hint: {"x":0.4, "y":0.6}
             size_hint: 0.1, 0.3
             text_size: self.size
             valign: 'top'
@@ -117,26 +115,26 @@ Builder.load_string("""
         Label: 
             id: Pokemon_Abilities
             text: "Pokemon Abilities"
-            pos_hint: {"x":0.3, "y":0.6}
+            pos_hint: {"x":0.5, "y":0.6}
             size_hint: 0.2, 0.3
             text_size: self.size
             valign: 'top'
             halign: 'center'
 
-        Label: 
-            id: Pokemon_Gender
-            text: "Pokemon Gender"
-            pos_hint: {"x":0.5, "y":0.6}
-            size_hint: 0.2, 0.3
-            text_size: self.size
-            valign: 'top'
-            halign: 'center'                    
+        # Label: 
+        #     id: Pokemon_Gender
+        #     text: "Pokemon Gender"
+        #     pos_hint: {"x":0.5, "y":0.6}
+        #     size_hint: 0.2, 0.3
+        #     text_size: self.size
+        #     valign: 'top'
+        #     halign: 'center'                    
 
         Label:
             id: Pokemon_Stats
             text: "Pokemon Stats"
-            pos_hint: {"x":0.5,"y":0.5}
-            size_hint: 0.5, 0.5
+            pos_hint: {"x":0.7,"y":0.5}
+            size_hint: 0.3, 0.5
             text_size: self.size
             valign: 'top'
             halign: 'center'
@@ -154,12 +152,12 @@ Builder.load_string("""
         Image:
             id: Normal
             source: 
-            pos_hint: {"x": 0, "y": 0.8}
+            pos_hint: {"x": 0.2, "y": 0.8}
             size_hint: 0.2, 0.2
         Image:
             id: Shiny
             source: 
-            pos_hint: {"x": 0, "y": 0.6}
+            pos_hint: {"x": 0.2, "y": 0.6}
             size_hint: 0.2, 0.2
 
 # These Buttons are to change the pokemon you are viewing
@@ -171,7 +169,6 @@ Builder.load_string("""
             on_press:
                 app.Pokedex_Input_Buttons(1)
                 app.Change_Text()
-
         Button:
             text: "-1"
             pos_hint: {"x": 0.1, "y":0.2}
@@ -215,21 +212,41 @@ Builder.load_string("""
 
 # These buttons are to change what gen the dex entry is from 
         Button: 
-            text: "Inc"
+            text: "Pokedex Inc"
             pos_hint: {"x": 0, "y": 0.5}
             size_hint: 0.1, 0.1
             background_color: 1, 0, 0
             on_press:
                 app.Region_Increase()
         Button: 
-            text: "Dec"
+            text: "Pokedex Dec"
             pos_hint: {"x": 0.1, "y": 0.5}
             size_hint: 0.1, 0.1
             background_color: 1, 0, 0
             on_press:
                 app.Region_Decrease()
+                    
+# These two buttons are to change the form of the pokemon
+        Button:
+            text: "Form Inc"
+            pos_hint: {"x": 0, "y": 0.6}
+            size_hint: 0.1, 0.1
+            background_color: 1, 0, 0
+            on_press:
+                app.Form_Change(0.1)
+                app.Change_Text()                  
+        Button:
+            text: "Form Dec"
+            pos_hint: {"x": 0.1, "y": 0.6}
+            size_hint: 0.1, 0.1
+            background_color: 1, 0, 0
+            on_press:
+                app.Form_Change(-0.1)
+                app.Change_Text()
 
+                
 
+                    
 <ScreenThree>:
     BoxLayout:
         Button:
@@ -325,9 +342,11 @@ Builder.load_string("""
 
 
 # Global Variables
-text_pokedex = "0"
+text_pokedex = float(0)
+form_value = text_pokedex
 text_catch_tracker = "0"
 region = 1
+
 
 # This part is used for the multiple windows by declaring what they are and where what they should be.
 class ScreenOne(Screen):
@@ -392,7 +411,7 @@ class ScreenApp(App):
         self.root.get_screen('screen_two').ids.Pokemon_Name.text = name_string
         self.root.get_screen('screen_two').ids.Pokemon_Type.text = type_string
         self.root.get_screen('screen_two').ids.Pokemon_Abilities.text = abilities_string
-        self.root.get_screen('screen_two').ids.Pokemon_Gender.text = gender_string
+        # self.root.get_screen('screen_two').ids.Pokemon_Gender.text = gender_string
         self.root.get_screen('screen_two').ids.Pokemon_Stats.text = stat_string
         # This important set of elif's are to send the correct regional data to the pokedex
         if region == 1:
@@ -436,10 +455,11 @@ class ScreenApp(App):
     def Pokedex_Input_Buttons(self, input_button_number):
         global text_pokedex
         dataframe = pd.read_excel('Pokemonstuff2.xlsx')
-        text_pokedex = float(text_pokedex) + input_button_number
-        if (float(text_pokedex) < 1):
+        text_pokedex = int(text_pokedex) + input_button_number
+        pokedex_number_check = text_pokedex
+        if (int(text_pokedex) < 1):
             text_pokedex = 1
-        if (float(text_pokedex) > 1025):
+        if (int(text_pokedex) > 1025):
             text_pokedex = 1025
 
     
@@ -499,6 +519,18 @@ class ScreenApp(App):
         else:
              entry_output = str(dataframe.loc[53, 0]) + ": " + str(dataframe.loc[53, float(text_pokedex)]) + "\n" + str(dataframe.loc[54, 0]) + ": " + str(dataframe.loc[54, float(text_pokedex)]) + "\n" + str(dataframe.loc[55, 0]) + ": " + str(dataframe.loc[55, float(text_pokedex)]) + "\n" + str(dataframe.loc[56, 0]) + ": " + str(dataframe.loc[56, float(text_pokedex)])
         self.root.get_screen("screen_two").ids.Dex_Entry.text = entry_output
+
+    def Form_Change(self, value):
+        global text_pokedex
+        dataframe = pd.read_excel('Pokemonstuff2.xlsx')
+        try:
+            text_pokedex = round(text_pokedex + value, 2)
+            print(dataframe.loc[0, text_pokedex])
+        except:
+            text_pokedex = round(text_pokedex - value)
+            print("there is no form")
+
+        
 
 
 
