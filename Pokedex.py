@@ -28,7 +28,7 @@ text_pokedex = float(0)
 form_value = text_pokedex
 text_catch_tracker = "0"
 region = 1
-map_value = 1
+map_value = 0
 pokedex_file = read_excel('Pokemonstuff2.xlsx')
 directory = os.getcwd()
 
@@ -78,6 +78,27 @@ def Region_Change(value):
         else:
             return str(pokedex_file.loc[53, 0]) + ": " + str(pokedex_file.loc[53, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[54, 0]) + ": " + str(pokedex_file.loc[54, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[55, 0]) + ": " + str(pokedex_file.loc[55, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[56, 0]) + ": " + str(pokedex_file.loc[56, float(text_pokedex)])
 
+def Region_Name(value):
+    if value == 1:
+        return "Kanto"
+    elif value == 2:
+        return "Johto"
+    elif value == 3:
+        return "Hoenn"
+    elif value == 4:
+        return "Sinnoh"
+    elif value == 5:
+        return "Unova"
+    elif value == 6:
+        return "Kalos"
+    elif value == 7:
+        return "Alola"
+    elif value == 8:
+        return "Galar"
+    elif value == 9:
+        return "Paldea"
+    else:
+        return "No Region"
 
 # This is the main screen
 class PokedexApp(App):
@@ -173,7 +194,7 @@ class PokedexApp(App):
         global directory
         global map_value
         Regional_Map = directory + "/Images/" + "Gen" + str(map_value) + "Map.png"
-        self.root.get_screen("screen_three").ids.MapImage.source = Regional_Map
+        self.root.get_screen("screen_three").ids.Map_Image.source = Regional_Map
 
     def Map_Changer(self, value):
         global map_value
@@ -182,6 +203,9 @@ class PokedexApp(App):
             map_value = 9
         elif (map_value < 1):
             map_value = 1
+        self.root.get_screen("screen_three").ids.Increase_Map.text = Region_Name(map_value + 1) 
+        self.root.get_screen("screen_three").ids.Map_Name.text = Region_Name(map_value) 
+        self.root.get_screen("screen_three").ids.Decrease_Map.text = Region_Name(map_value - 1)
 
 
 

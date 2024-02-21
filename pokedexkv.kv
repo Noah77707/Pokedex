@@ -212,22 +212,29 @@
                 root.manager.transition.durarion = 1
                 root.manager.current = 'screen_one'  
         Image:
-            id: MapImage
+            id: Map_Image
             source: 
             pos_hint: {"x": 0.2, "y": 0.2}
             size_hint: 0.8, 0.8
+        Label:
+            text: "No Region Selected"
+            id: Map_Name
+            pos_hint: {"x": 0.4, "y": 0}
+            size_hint: 0.4, 0.2
         Button:
             text: "Next Region Map"
+            id: Increase_Map
             pos_hint: {"x":0.2, "y": 0}
-            size_hint: 0.4, 0.2
+            size_hint: 0.2, 0.2
             background_color: 1, 0, 1, 1
             on_press:
                 app.Map_Changer(1)
                 app.Region_Map()
         Button:
             text: "Previous Region Map"
-            pos_hint: {"x":0.6, "y": 0}
-            size_hint: 0.4, 0.2
+            id: Decrease_Map
+            pos_hint: {"x":0.8, "y": 0}
+            size_hint: 0.2, 0.2
             background_color: 1, 0, 1, 1
             on_press:
                 app.Map_Changer(-1)
