@@ -1,0 +1,317 @@
+<ScreenOne>:
+    # This is the main screen
+    FloatLayout:
+        Label:
+            text: 'Pokedex app v0.4' 
+            background_color: 1, 0, 0, 0
+            pos_hint: {"x":0, "y":0.7}
+            size_hint: 1, 0.3
+        Button:
+            text: "Go to Pokedex"
+            background_color: 1, 0, 0, 1
+            pos_hint: {"x": 0, "y": 0.3}
+            size_hint: 0.5, 0.3
+            on_press: 
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'screen_two'
+        Button:
+            text: "Go to Region Maps (basic)"
+            background_color: 1, 0, 1, 1
+            pos_hint: {"x": 0.5, "y": 0.3}
+            size_hint: 0.5, 0.3
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'screen_three'
+        Button:
+            text: "Go to Move Screen (not worked on at all)"
+            background_color: 0, 1, 0, 1
+            pos_hint: {"x": 0, "y": 0}
+            size_hint: 0.5, 0.3
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'screen_four'
+        Button:
+            text: "Go to Catch Tracker (slightly worked on)"
+            background_color: 0, 1, 1, 1
+            pos_hint: {"x": 0.5, "y": 0}
+            size_hint: 0.5, 0.3
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'screen_five'
+
+<ScreenTwo>:
+    FloatLayout:
+    # This is the pokedex screen
+# This button takes you back to the main screen
+        Button:
+            text: "Go back"
+            pos_hint: {"x":0, "y":0}
+            size_hint: 0.2, 0.2
+            background_color: 1, 0, 0
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.transition.durarion = 1
+                root.manager.current = 'screen_one'
+
+# Top Lavel is some information about the pokemon, Middle three are to put down the types, abilites, and gender ratio in an easy to read way, and the bottom label is dex entries      
+        Label:
+            id: Pokemon_Name
+            text: "Pokemon Name"
+            pos_hint: {"x":0.2, "y":0.6}
+            size_hint: 0.8, 0.4
+            text_size: self.size
+            valign: 'top'
+            halign: 'center'
+                    
+        Label: 
+            id: Pokemon_Type
+            text: "Pokemon Type"
+            pos_hint: {"x":0.4, "y":0.6}
+            size_hint: 0.1, 0.3
+            text_size: self.size
+            valign: 'top'
+            halign: 'center'
+
+        Label: 
+            id: Pokemon_Abilities
+            text: "Pokemon Abilities"
+            pos_hint: {"x":0.5, "y":0.6}
+            size_hint: 0.2, 0.3
+            text_size: self.size
+            valign: 'top'
+            halign: 'center'                 
+
+        Label:
+            id: Pokemon_Stats
+            text: "Pokemon Stats"
+            pos_hint: {"x":0.7,"y":0.5}
+            size_hint: 0.3, 0.5
+            text_size: self.size
+            valign: 'top'
+            halign: 'center'
+                                       
+        Label:
+            id: Dex_Entry
+            text: "Pokemon Dex Entry"
+            pos_hint: {"x": 0.2, "y":0}
+            size_hint: 0.8, 0.6
+            text_size: self.size
+            valign: 'top'
+            halign: 'center'
+
+# The pokemon sprite
+        Image:
+            id: Normal
+            source: 
+            pos_hint: {"x": 0.2, "y": 0.8}
+            size_hint: 0.2, 0.2
+        Image:
+            id: Shiny
+            source: 
+            pos_hint: {"x": 0.2, "y": 0.6}
+            size_hint: 0.2, 0.2
+
+# These Buttons are to change the pokemon you are viewing
+        Button:
+            text: "+1"
+            pos_hint: {"x": 0, "y":0.2}
+            size_hint: 0.1, 0.1
+            background_color: 1, 0, 0
+            on_press:
+                app.Pokedex_Input_Buttons(1)
+                app.Change_Text()
+        Button:
+            text: "-1"
+            pos_hint: {"x": 0.1, "y":0.2}
+            size_hint: 0.1, 0.1 
+            background_color: 1, 0, 0
+            on_press:
+                app.Pokedex_Input_Buttons(-1)  
+                app.Change_Text()   
+        Button:
+            text: "+10"
+            pos_hint: {"x": 0, "y":0.3}
+            size_hint: 0.1, 0.1
+            background_color: 1, 0, 0
+            on_press:
+                app.Pokedex_Input_Buttons(10)
+                app.Change_Text()
+        Button:
+            text: "-10"
+            pos_hint: {"x": 0.1, "y":0.3}
+            size_hint: 0.1, 0.1
+            background_color: 1, 0, 0
+            on_press:
+                app.Pokedex_Input_Buttons(-10)
+                app.Change_Text()
+        Button:
+            text: "+100"
+            pos_hint: {"x": 0, "y":0.4}
+            size_hint: 0.1, 0.1
+            background_color: 1, 0, 0
+            on_press:
+                app.Pokedex_Input_Buttons(100)
+                app.Change_Text()
+        Button:
+            text: "-100" 
+            pos_hint: {"x": 0.1, "y":0.4}
+            size_hint: 0.1, 0.1
+            background_color: 1, 0, 0
+            on_press:
+                app.Pokedex_Input_Buttons(-100) 
+                app.Change_Text()             
+
+# These buttons are to change what gen the dex entry is from 
+        Button: 
+            text: "Pokedex Inc"
+            pos_hint: {"x": 0, "y": 0.5}
+            size_hint: 0.1, 0.1
+            background_color: 1, 0, 0
+            on_press:
+                app.Region_Change(1)
+        Button: 
+            text: "Pokedex Dec"
+            pos_hint: {"x": 0.1, "y": 0.5}
+            size_hint: 0.1, 0.1
+            background_color: 1, 0, 0
+            on_press:
+                app.Region_Change(-1)
+                    
+# These two buttons are to change the form of the pokemon
+        Button:
+            text: "Form Inc"
+            pos_hint: {"x": 0, "y": 0.6}
+            size_hint: 0.1, 0.1
+            background_color: 1, 0, 0
+            on_press:
+                app.Form_Change(0.1)
+                app.Change_Text()                  
+        Button:
+            text: "Form Dec"
+            pos_hint: {"x": 0.1, "y": 0.6}
+            size_hint: 0.1, 0.1
+            background_color: 1, 0, 0
+            on_press:
+                app.Form_Change(-0.1)
+                app.Change_Text()
+
+                         
+<ScreenThree>:
+    FloatLayout:
+        Button:
+            text: "Go back (Screen Three)"
+            background_color: 1, 0, 1, 1
+            pos_hint: {"x":0, "y":0}
+            size_hint: 0.2, 1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.transition.durarion = 1
+                root.manager.current = 'screen_one'  
+        Image:
+            id: MapImage
+            source: 
+            pos_hint: {"x": 0.2, "y": 0.2}
+            size_hint: 0.8, 0.8
+        Button:
+            text: "Next Region Map"
+            pos_hint: {"x":0.2, "y": 0}
+            size_hint: 0.4, 0.2
+            background_color: 1, 0, 1, 1
+            on_press:
+                app.Map_Changer(1)
+                app.Region_Map()
+        Button:
+            text: "Previous Region Map"
+            pos_hint: {"x":0.6, "y": 0}
+            size_hint: 0.4, 0.2
+            background_color: 1, 0, 1, 1
+            on_press:
+                app.Map_Changer(-1)
+                app.Region_Map()
+
+
+
+
+<ScreenFour>
+    BoxLayout:
+        Button:
+            text: "Go back (Screen Four)"
+            background_color: 0, 1, 0, 1
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.transition.durarion = 1
+                root.manager.current = 'screen_one'  
+<ScreenFive>
+    FloatLayout:
+        Button:
+            text: "Go back"
+            background_color: 0, 1, 1, 1
+            pos_hint: {"x": 0, "y": 0}
+            size_hint: 0.2, 0.2
+            on_press:
+                root.manager.transition.direction = 'right'
+                root.manager.transition.durarion = 1
+                root.manager.current = 'screen_one' 
+    
+# the pokemon input
+        Label:
+            id: Pokemon_Catch   
+            text: "Pokemon"
+            pos_hint: {"x": 0.2, "y": 0.8}
+            size_hint: 0.8, 0.2
+            valign: 'top'
+            halign: 'center'
+                     
+# These Buttons are to change the pokemon you are viewing
+        Button:
+            text: "+1"
+            pos_hint: {"x": 0, "y":0.2}
+            size_hint: 0.1, 0.1
+            background_color: 0, 1, 1, 1
+            on_press:
+                app.Pokedex_Input_Buttons(1)
+
+
+        Button:
+            text: "-1"
+            pos_hint: {"x": 0.1, "y":0.2}
+            size_hint: 0.1, 0.1 
+            background_color: 0, 1, 1, 1
+            on_press:
+                app.Pokedex_Input_Buttons(-1)  
+
+        Button:
+            text: "+10"
+            pos_hint: {"x": 0, "y":0.3}
+            size_hint: 0.1, 0.1
+            background_color: 0, 1, 1, 1
+            on_press:
+                app.Pokedex_Input_Buttons(10)
+
+        Button:
+            text: "-10"
+            pos_hint: {"x": 0.1, "y":0.3}
+            size_hint: 0.1, 0.1
+            background_color: 0, 1, 1, 1
+            on_press:
+                app.Pokedex_Input_Buttons(-10)
+                    
+        Button:
+            text: "+100"
+            pos_hint: {"x": 0, "y":0.4}
+            size_hint: 0.1, 0.1
+            background_color: 0, 1, 1, 1
+            on_press:
+                app.Pokedex_Input_Buttons(100)
+                    
+        Button:
+            text: "-100" 
+            pos_hint: {"x": 0.1, "y":0.4}
+            size_hint: 0.1, 0.1
+            background_color: 0, 1, 1, 1
+            on_press:
+                app.Pokedex_Input_Buttons(-100) 
