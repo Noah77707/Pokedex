@@ -76,7 +76,7 @@ def Region_Change(value):
         elif value == 8: 
              return str(pokedex_file.loc[47, 0]) + ": " + str(pokedex_file.loc[47, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[48, 0]) + ": " + str(pokedex_file.loc[48, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[49, 0]) + ": " + str(pokedex_file.loc[49, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[50, 0]) + ": " + str(pokedex_file.loc[50, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[51, 0]) + ": " + str(pokedex_file.loc[51, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[52, 0]) + ": " + str(pokedex_file.loc[52, float(text_pokedex)])
         else:
-            return str(pokedex_file.loc[53, 0]) + ": " + str(pokedex_file.loc[53, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[54, 0]) + ": " + str(pokedex_file.loc[54, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[55, 0]) + ": " + str(pokedex_file.loc[55, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[56, 0]) + ": " + str(pokedex_file.loc[56, float(text_pokedex)])
+            return str(pokedex_file.loc[53, 0]) + ": " + str(pokedex_file.loc[53, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[54, 0]) + ": " + str(pokedex_file.loc[54, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[55, 0]) + ": " + str(pokedex_file.loc[55, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[56, 0]) + ": " + str(pokedex_file.loc[56, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[57, 0]) + ": " + str(pokedex_file.loc[57, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[58, 0]) + ": " + str(pokedex_file.loc[58, float(text_pokedex)]) 
 
 def Region_Name(value):
     if value == 1:
@@ -99,6 +99,19 @@ def Region_Name(value):
         return "Paldea"
     else:
         return "No Region"
+
+# def Type_Effectiveness_Chart(value):
+#     global pokedex_file
+#     pokemon_types = str(pokedex_file.loc[3, value]).split()
+#     type_chart_offensive = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+#     type_chart_defensive = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+#     type_list = ["Normal", "Fire", "Water", "Electric", "Grass", "Ice", "Fighting", "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost", "Dragon", "Dark", "Steel", "Fairy"]
+#     for i in type_list:
+#         for j in pokemon_types:
+#             if type_list[i] == pokemon_types[j]:  
+#                 type_text = list.index(pokemon_types)
+#                 print(type_text)
+
 
 # This is the main screen
 class PokedexApp(App):
@@ -187,7 +200,7 @@ class PokedexApp(App):
             print(pokedex_file.loc[0, text_pokedex])
         except:
             text_pokedex = round(text_pokedex - value)
-            print("there is no form")
+            print("there is no alt form")
 
 # Screen 3 Functions
     def Region_Map(self):
