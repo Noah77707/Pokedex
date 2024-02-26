@@ -17,7 +17,7 @@ import csv
 # the version number is updated upon something I believe to be a huge milestone: These are in the README.txt
 
 # This makes the window be the correct size for the raspberry pi.
-Window.size = (790, 450)
+Window.fullscreen = 'auto'
 print(Window.size)
 
 # This builds the correct file
@@ -41,8 +41,7 @@ class ScreenThree(Screen):
     pass
 class ScreenFour(Screen):
     pass
-class ScreenFive(Screen):
-    pass
+
 
 screen_manager = ScreenManager()
 # Main screen
@@ -53,8 +52,6 @@ screen_manager.add_widget(ScreenTwo(name = "screen_two"))
 screen_manager.add_widget(ScreenThree(name = "screen_three"))
 # Move Screen?
 screen_manager.add_widget(ScreenFour(name = "screen_four"))
-# Catch Tracker
-screen_manager.add_widget(ScreenFive(name = "screen_five"))
 
 # Function to change the Generations that the pokedex shows
 def Region_Change(value):
@@ -76,7 +73,7 @@ def Region_Change(value):
         elif value == 8: 
              return str(pokedex_file.loc[47, 0]) + ": " + str(pokedex_file.loc[47, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[48, 0]) + ": " + str(pokedex_file.loc[48, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[49, 0]) + ": " + str(pokedex_file.loc[49, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[50, 0]) + ": " + str(pokedex_file.loc[50, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[51, 0]) + ": " + str(pokedex_file.loc[51, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[52, 0]) + ": " + str(pokedex_file.loc[52, float(text_pokedex)])
         else:
-            return str(pokedex_file.loc[53, 0]) + ": " + str(pokedex_file.loc[53, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[54, 0]) + ": " + str(pokedex_file.loc[54, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[55, 0]) + ": " + str(pokedex_file.loc[55, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[56, 0]) + ": " + str(pokedex_file.loc[56, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[57, 0]) + ": " + str(pokedex_file.loc[57, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[58, 0]) + ": " + str(pokedex_file.loc[58, float(text_pokedex)]) 
+            return str(pokedex_file.loc[53, 0]) + ": " + str(pokedex_file.loc[53, float(text_pokedex)]) + "\n" + str(pokedex_file.loc[54, 0]) + ": " + str(pokedex_file.loc[54, float(text_pokedex)]) 
 
 def Region_Name(value):
     if value == 1:
@@ -106,11 +103,14 @@ def Region_Name(value):
 #     type_chart_offensive = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 #     type_chart_defensive = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 #     type_list = ["Normal", "Fire", "Water", "Electric", "Grass", "Ice", "Fighting", "Poison", "Ground", "Flying", "Psychic", "Bug", "Rock", "Ghost", "Dragon", "Dark", "Steel", "Fairy"]
-#     for i in type_list:
-#         for j in pokemon_types:
-#             if type_list[i] == pokemon_types[j]:  
-#                 type_text = list.index(pokemon_types)
-#                 print(type_text)
+#     for x in range(len(pokemon_types)):
+#         try:
+#             index = type_list.index(pokemon_types[x])
+#             print(index)
+#             print(str(pokedex_file.loc[98, 12+index]))
+#         except:
+#             print("Not recognized type")
+
 
 
 # This is the main screen
