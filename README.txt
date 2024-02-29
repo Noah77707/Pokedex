@@ -26,3 +26,4 @@ v0.3: This was when I got images working in the pokedex screen, along with makin
 v0.4: Finished up the Kanto dex, starting work on Johto dex
 v0.5: Finished up the Johto dex, starting work on Hoenn dex
 v0.6: Finished up the Hoenn dex, starting work on Sinnoh dex
+v0.7: Finished up the Sinnoh dex, starting work on Unova dex
