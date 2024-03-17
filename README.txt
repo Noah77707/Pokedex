@@ -27,3 +27,4 @@ v0.4: Finished up the Kanto dex, starting work on Johto dex
 v0.5: Finished up the Johto dex, starting work on Hoenn dex
 v0.6: Finished up the Hoenn dex, starting work on Sinnoh dex
 v0.7: Finished up the Sinnoh dex, starting work on Unova dex
+v0.8: Finished up the Unova dex, starting work on Kalos dex

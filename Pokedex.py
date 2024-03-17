@@ -222,25 +222,6 @@ class PokedexApp(App):
 
 
 
-
-
-# Screen 5 Functions
-    def Catch_Tracker(self, input):
-        global text_catch_tracker
-        global pokedex_file
-        # self.root.get_screen('screen_five').ids.
-
-    def Catch_Tracker_Buttons(self, input_catch_tracker_buttons):
-        global text_pokedex
-        global pokedex_file
-        text_catch_tracker = float(text_pokedex) + input_catch_tracker_buttons
-        if (float(text_catch_tracker) < 1):
-            text_catch_tracker = 1
-        if (float(text_catch_tracker) > 1025):
-            text_catch_tracker = 1025
-
-
-
 # Starts the app when you run the python file
 if __name__ == '__main__' :
     PokedexApp().run()
